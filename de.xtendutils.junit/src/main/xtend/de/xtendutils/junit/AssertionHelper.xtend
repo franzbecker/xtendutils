@@ -54,10 +54,10 @@ class AssertionHelper {
 	 * @param message the identifying message for the {@link AssertionError} ({@code null} okay)
 	 */
 	def void assertEmpty(Iterable<?> iterable, String message) {
-		if(iterable === null) {
+		if (iterable === null) {
 			Assert.fail(message.format(null, "empty iterable"))
 		}
-		if(!iterable.empty) {
+		if (!iterable.empty) {
 			val size = iterable.size
 			Assert.fail(message.format(size.elementsString, "empty iterable"))
 		}
@@ -83,10 +83,10 @@ class AssertionHelper {
 	 * @return the iterable for chaining
 	 */
 	def <T> Iterable<T> assertNotEmpty(Iterable<T> iterable, String message) {
-		if(iterable === null) {
+		if (iterable === null) {
 			Assert.fail(message.format(null, "non-empty iterable"))
 		}
-		if(iterable.empty) {
+		if (iterable.empty) {
 			Assert.fail(message.format("empty", "non-empty iterable"))
 		}
 		return iterable
@@ -138,11 +138,11 @@ class AssertionHelper {
 	 * @return the iterable for chaining
 	 */
 	def <T> Iterable<T> assertSize(Iterable<T> iterable, int expectedSize, String message) {
-		if(iterable === null) {
+		if (iterable === null) {
 			Assert.fail(message.format(null, expectedSize.elementsString))
 		}
 		val size = iterable.size
-		if(size !== expectedSize) {
+		if (size !== expectedSize) {
 			Assert.fail(message.format(size.elementsString, expectedSize.elementsString))
 		}
 		return iterable
@@ -170,13 +170,13 @@ class AssertionHelper {
 	 * @return the object casted to the type
 	 */
 	def <T> T assertInstanceOf(Object object, Class<T> type, String message) {
-		if(type === null) {
+		if (type === null) {
 			throw new IllegalArgumentException("The passed type may not be null.")
 		}
-		if(object === null) {
+		if (object === null) {
 			Assert.fail(message.format(null, type.name))
 		}
-		if(!(type.isAssignableFrom(object.class))) {
+		if (!(type.isAssignableFrom(object.class))) {
 			Assert.fail(message.format(object.class.name, type.name))
 		}
 		return object as T
@@ -194,12 +194,12 @@ class AssertionHelper {
 	 * @param message the identifying message for the {@link AssertionError} ({@code null} okay)
 	 */
 	def void assertEquals(BigDecimal actual, BigDecimal expected, String message) {
-		if(actual === null) {
-			if(expected !== null) {
+		if (actual === null) {
+			if (expected !== null) {
 				Assert.fail(message.format(actual, expected))
 			}
 		} else {
-			if(actual.compareTo(expected) !== 0) {
+			if (actual.compareTo(expected) !== 0) {
 				Assert.fail(message.format(actual, expected))
 			}
 		}
@@ -231,8 +231,8 @@ class AssertionHelper {
 	 * @param message the identifying message for the {@link AssertionError} ({@code null} okay)
 	 */
 	def void assertNotEquals(BigDecimal actual, BigDecimal unexpected, String message) {
-		if(actual === null) {
-			if(unexpected === null) {
+		if (actual === null) {
+			if (unexpected === null) {
 				failEquals(message, null)
 			}
 		}
@@ -260,7 +260,7 @@ class AssertionHelper {
 	def <T extends Throwable> T assertFail((Object)=>Object function, Class<T> throwableClass, String message) {
 		try {
 			function.apply(null)
-		} catch(Throwable actual) {
+		} catch (Throwable actual) {
 			return actual.assertInstanceOf(throwableClass)
 		}
 		Assert.fail(message.format("no exception", throwableClass.name))
@@ -289,7 +289,7 @@ class AssertionHelper {
 	def <T extends Throwable> T assertFail((Object)=>void procedure, Class<T> throwableClass, String message) {
 		try {
 			procedure.apply(null)
-		} catch(Throwable actual) {
+		} catch (Throwable actual) {
 			return actual.assertInstanceOf(throwableClass)
 		}
 		Assert.fail(message.format("no exception", throwableClass.name))
@@ -453,10 +453,10 @@ class AssertionHelper {
 	 * Method from {@link Assert} converted to Xtend since it is package private and not accessible.
 	 */
 	protected def String format(String messageObj, Object actual, Object expected) {
-		val message = if(messageObj.nullOrEmpty) "" else ( messageObj + " ")
+		val message = if (messageObj.nullOrEmpty) "" else ( messageObj + " ")
 		val expectedString = String.valueOf(expected)
 		val actualString = String.valueOf(actual)
-		if(expectedString == actualString) {
+		if (expectedString == actualString) {
 			return '''«message»expected: «expected.formatClassAndValue» but was: «actual.formatClassAndValue»'''
 		} else {
 			return '''«message»expected: <«expected»> but was: <«actual»>'''
@@ -467,7 +467,7 @@ class AssertionHelper {
 	 * Method from {@link Assert} converted to Xtend since it is package private and not accessible.
 	 */
 	protected def String formatClassAndValue(Object value) {
-		if(value === null) "<null>" else '''«value.class.name»<«String.valueOf(value)»>'''
+		if (value === null) "<null>" else '''«value.class.name»<«String.valueOf(value)»>'''
 	}
 
 	/**
