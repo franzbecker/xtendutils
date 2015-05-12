@@ -338,6 +338,18 @@ class AssertionHelperTest {
 			message.assertEquals("Oops expected: <java.lang.String> but was: <>")
 		]
 	}
+	
+	/**
+	 * Test the converted format & formatClassAndValue methods.
+	 */
+	@Test
+	def void testFormat() {
+		// When + Then
+		format(null, "actual", "expected").assertEquals("expected: <expected> but was: <actual>")
+		format("", "actual", "expected").assertEquals("expected: <expected> but was: <actual>")
+		format("message", "actual", "expected").assertEquals("message expected: <expected> but was: <actual>")
+		format("message", 5, new BigDecimal("5")).assertEquals("message expected: java.math.BigDecimal<5> but was: java.lang.Integer<5>")
+	}
 
 	// TODO more tests!
 
