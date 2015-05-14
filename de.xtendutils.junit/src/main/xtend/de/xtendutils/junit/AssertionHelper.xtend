@@ -35,9 +35,12 @@ class AssertionHelper {
 	protected new() {
 	}
 
+	//////////////////////////////////////////////
 	// Methods not included in Assert below
+	//////////////////////////////////////////////
+	
 	/**
-	 * Asserts that a iterable is empty.
+	 * Asserts that an iterable is empty.
 	 * If it isn't it throws an {@link AssertionError}.
 	 * 
 	 * @param iterable iterable to be checked
@@ -47,7 +50,7 @@ class AssertionHelper {
 	}
 
 	/**
-	 * Asserts that a iterable is empty.
+	 * Asserts that an iterable is empty.
 	 * If it isn't it throws an {@link AssertionError} with the given message.
 	 * 
 	 * @param iterable iterable to be checked
@@ -64,7 +67,7 @@ class AssertionHelper {
 	}
 
 	/**
-	 * Asserts that a iterable is non-empty.
+	 * Asserts that an iterable is non-empty.
 	 * If it isn't it throws an {@link AssertionError}.
 	 * 
 	 * @param iterable iterable to be checked
@@ -75,7 +78,7 @@ class AssertionHelper {
 	}
 
 	/**
-	 * Asserts that a iterable is non-empty.
+	 * Asserts that an iterable is non-empty.
 	 * If it isn't it throws an {@link AssertionError} with the given message.
 	 * 
 	 * @param iterable iterable to be checked
@@ -93,7 +96,7 @@ class AssertionHelper {
 	}
 
 	/**
-	 * Asserts that an iterable has a single element.
+	 * Asserts that an iterable contains a single element.
 	 * If it doesn't it throws an {@link AssertionError} with the given message.
 	 * 
 	 * @param iterable the iterable to be checked
@@ -104,7 +107,7 @@ class AssertionHelper {
 	}
 
 	/**
-	 * Asserts that an iterable has a single element.
+	 * Asserts that an iterable contains a single element.
 	 * If it doesn't it throws an {@link AssertionError} with the given message.
 	 * 
 	 * @param iterable the iterable to be checked
@@ -218,6 +221,8 @@ class AssertionHelper {
 	def void assertEquals(BigDecimal actual, BigDecimal expected) {
 		actual.assertEquals(expected, null)
 	}
+	
+	// TODO should we rather provide assertEquals for subtypes of Comparable?
 
 	/**
 	 * Asserts that two {@link BigDecimal} objects are <b>not</b>equals based on the result of their
@@ -296,9 +301,10 @@ class AssertionHelper {
 		throw new IllegalStateException // dead code
 	}
 
-	/*
-	 * Standard JUnit methods
-	 */
+	//////////////////////////////////////////////
+	// Standard JUnit methods below
+	//////////////////////////////////////////////
+
 	/** Calls {@link Assert#assertTrue(String, boolean)} */
 	def void assertTrue(boolean condition, String message) {
 		Assert.assertTrue(message, condition)
@@ -410,13 +416,15 @@ class AssertionHelper {
 	}
 
 	/** Calls {@link Assert#assertNotNull(String, Object)} */
-	def void assertNotNull(Object object, String message) {
+	def <T> T assertNotNull(T object, String message) {
 		Assert.assertNotNull(message, object)
+		return object
 	}
 
 	/** Calls {@link Assert#assertNotNull(Object)} */
-	def void assertNotNull(Object object) {
+	def <T> T assertNotNull(T object) {
 		Assert.assertNotNull(object)
+		return object
 	}
 
 	/** Calls {@link Assert#assertNull(String, Object)} */
