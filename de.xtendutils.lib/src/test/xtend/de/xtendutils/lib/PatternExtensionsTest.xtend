@@ -19,7 +19,7 @@ class PatternExtensionsTest {
 	def void testCompile() {
 		// When
 		val wsPattern = "\\s".compile
-		val xPattern = "x".compile(CASE_INSENSITIVE) 
+		val xPattern = '''x'''.compile(CASE_INSENSITIVE)
 		
 		// Then
 		wsPattern.pattern.assertEquals("\\s")

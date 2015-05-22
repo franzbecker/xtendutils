@@ -33,11 +33,11 @@ public class PatternExtensions {
 	 * In contrast to {@link Pattern#compile(String, int)} passing {@link CharSequence} is supported.
 	 * 
 	 * @param regex a {@link CharSequence}, may not be {@code null}.
-	 * @param flags see {@link Pattern#compile(String, int)}
+	 * @param flags see {@link Pattern#compile(String, int)}.
 	 * @return the compiled {@link Pattern}.
 	 */
 	@Pure
-	@Inline(value="Pattern.compile($1, $2)", imported=Pattern.class)
+	@Inline(value="Pattern.compile($1.toString(), $2)", imported=Pattern.class)
 	public static Pattern compile(CharSequence regex, int flags) {
 		return Pattern.compile(regex.toString(), flags);
 	}
