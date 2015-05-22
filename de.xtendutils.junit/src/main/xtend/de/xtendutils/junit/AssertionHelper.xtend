@@ -10,6 +10,7 @@
 package de.xtendutils.junit
 
 import java.math.BigDecimal
+import javax.annotation.ParametersAreNullableByDefault
 import javax.inject.Singleton
 import org.junit.Assert
 
@@ -20,6 +21,7 @@ import org.junit.Assert
  * Preferences - Java - JUnit - Add Class - and pick this class.</p>
  */
 @Singleton
+@ParametersAreNullableByDefault
 class AssertionHelper {
 
 	static val INSTANCE = new AssertionHelper
