@@ -23,7 +23,7 @@ public class PatternExtensions {
 	 * @return the compiled {@link Pattern}.
 	 */
 	@Pure
-	@Inline(value="Pattern.compile($1)", imported=Pattern.class)
+	@Inline(value="Pattern.compile($1.toString())", imported=Pattern.class)
 	public static Pattern compile(CharSequence regex) {
 		return Pattern.compile(regex.toString());
 	}
