@@ -11,6 +11,7 @@
 	<modules>
 		<module>de.xtendutils.parent</module>
 		<module>de.xtendutils.junit</module>
+		<module>de.xtendutils.lib</module>
 	</modules>
 
 </project>
