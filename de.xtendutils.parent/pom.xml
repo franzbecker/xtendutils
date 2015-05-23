@@ -19,7 +19,7 @@
 		<version.maven-surefire-plugin>2.18.1</version.maven-surefire-plugin>
 		<version.jacoco-maven-plugin>0.7.4.201502262128</version.jacoco-maven-plugin>
 
-		<version.java>1.7</version.java>
+		<version.java>1.8</version.java>
 		<version.xtend>2.8.2</version.xtend>
 		<version.guice>4.0</version.guice>
 		<version.junit>4.12</version.junit>
