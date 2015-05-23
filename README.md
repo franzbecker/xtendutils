@@ -38,20 +38,18 @@ Here are some sample assertions that you can do:
   // assertions on iterable
   #[].assertEmpty
   #["test"].assertSingleElement => [
-    assertEquals("test")
+	assertEquals("test")
   ]
+
+  // assertions on lambdas
+  val divide = [BigDecimal x, BigDecimal y | x.divide(y)]
+  
+  [divide.apply(1bd, 0bd)].assertFail(ArithmeticException) => [
+     message.assertEquals("Division by zero")
+]
 ```
 
-Assertions on lambdas:
-```xtend
-	val divide = [BigDecimal x, BigDecimal y | x.divide(y)]
-		
-	[divide.apply(1bd, 0bd)].assertFail(ArithmeticException) => [
-		message.assertEquals("Division by zero")
-	]
-```
-
-In AssertJ with Java 8 you would write:
+To implement the last example in AssertJ with Java 8 you would write:
 ```java
 	final BiFunction<BigDecimal, BigDecimal, BigDecimal> divide = (BigDecimal x, BigDecimal y) -> x.divide(y);
 		
