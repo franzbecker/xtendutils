@@ -23,6 +23,7 @@
 		<version.xtend>2.8.2</version.xtend>
 		<version.guice>4.0</version.guice>
 		<version.junit>4.12</version.junit>
+		<version.assertj>3.0.0</version.assertj>
 		<version.mockito>1.10.19</version.mockito>
 		<version.jsr305>3.0.0</version.jsr305>
 
@@ -53,6 +54,12 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<version>${version.assertj}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

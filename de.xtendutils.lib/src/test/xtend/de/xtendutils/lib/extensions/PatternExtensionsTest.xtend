@@ -1,4 +1,4 @@
-package de.xtendutils.lib
+package de.xtendutils.lib.extensions
 
 import de.xtendutils.junit.AssertionHelper
 import de.xtendutils.lib.extensions.PatternExtensions
@@ -15,8 +15,12 @@ class PatternExtensionsTest {
 	
 	extension AssertionHelper = AssertionHelper.instance
 	
+	/**
+	 * The compile methods are both {@link Inline inlined} so we're testing the
+	 * inlined code here, not the real method call.
+	 */
 	@Test
-	def void testCompile() {
+	def void testCompileInlined() {
 		// When
 		val wsPattern = '''\s'''.compile
 		val xPattern = '''x'''.compile(CASE_INSENSITIVE)
