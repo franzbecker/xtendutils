@@ -13,6 +13,7 @@ import java.math.BigDecimal
 import javax.annotation.ParametersAreNullableByDefault
 import javax.inject.Singleton
 import org.junit.Assert
+import javax.annotation.Nonnull
 
 // TODO proper comment, old one was not good enough
 /**
@@ -161,7 +162,7 @@ class AssertionHelper {
 	 * @param type the type to check against (not {@code null})
 	 * @return the object casted to the type
 	 */
-	def <T> T assertInstanceOf(Object object, Class<T> type) {
+	def <T> T assertInstanceOf(Object object, @Nonnull Class<T> type) {
 		object.assertInstanceOf(type, null)
 	}
 
@@ -174,7 +175,7 @@ class AssertionHelper {
 	 * @param message the identifying message for the {@link AssertionError} ({@code null} okay)
 	 * @return the object casted to the type
 	 */
-	def <T> T assertInstanceOf(Object object, Class<T> type, String message) {
+	def <T> T assertInstanceOf(Object object, @Nonnull Class<T> type, String message) {
 		if (type === null) {
 			throw new IllegalArgumentException("The passed type may not be null.")
 		}
