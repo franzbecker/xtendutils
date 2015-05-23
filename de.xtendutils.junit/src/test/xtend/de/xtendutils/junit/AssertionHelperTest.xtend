@@ -306,12 +306,16 @@ class AssertionHelperTest extends AbstractTest {
 		val y = new BigDecimal("6.1")
 
 		// When + Then
-		x.assertEquals(x);
+		x.assertEquals(x).assertSame(x); // test chaining as well
 		[x.assertEquals(y)].assertFail(AssertionError) => [
 			message.assertEquals("expected: <6.1> but was: <5.1>")
 		]
 		[x.assertEquals(y, "Oops")].assertFail(AssertionError) => [
 			message.assertEquals("Oops expected: <6.1> but was: <5.1>")
+		]
+		x.assertNotEquals(y).assertSame(x); // test chaining as well
+		[x.assertNotEquals(x, "Oops")].assertFail(AssertionError) => [
+			message.assertEquals("Oops. Actual: 5.1")
 		]
 	}
 

@@ -197,8 +197,9 @@ class AssertionHelper {
 	 * @param actual actual value
 	 * @param expected expected value
 	 * @param message the identifying message for the {@link AssertionError} ({@code null} okay)
+	 * @return actual for chaining
 	 */
-	def void assertEquals(BigDecimal actual, BigDecimal expected, String message) {
+	def BigDecimal assertEquals(BigDecimal actual, BigDecimal expected, String message) {
 		if (actual === null) {
 			if (expected !== null) {
 				Assert.fail(message.format(actual, expected))
@@ -208,6 +209,7 @@ class AssertionHelper {
 				Assert.fail(message.format(actual, expected))
 			}
 		}
+		return actual
 	}
 
 	/**
@@ -219,9 +221,10 @@ class AssertionHelper {
 	 * 
 	 * @param actual actual value
 	 * @param expected expected value
+	 * @return actual for chaining
 	 */
-	def void assertEquals(BigDecimal actual, BigDecimal expected) {
-		actual.assertEquals(expected, null)
+	def BigDecimal assertEquals(BigDecimal actual, BigDecimal expected) {
+		return actual.assertEquals(expected, null)
 	}
 	
 	// TODO should we rather provide assertEquals for subtypes of Comparable?
@@ -231,18 +234,39 @@ class AssertionHelper {
 	 * {@link BigDecimal#compareTo(BigDecimal) compareTo} method. 
 	 * If they are not, an {@link AssertionError} is thrown with the given message. 
 	 * 
-	 * If {@code actual} and {@code expected} are {@code null}, they are considered equal.
+	 * If {@code actual} and {@code expected} both are {@code null}, they are considered equal.
 	 * 
 	 * @param actual the value to check against {@code unexpected}
 	 * @param unexpected unexpected value to check
 	 * @param message the identifying message for the {@link AssertionError} ({@code null} okay)
+	 * @return actual for chaining
 	 */
-	def void assertNotEquals(BigDecimal actual, BigDecimal unexpected, String message) {
+	def BigDecimal assertNotEquals(BigDecimal actual, BigDecimal unexpected, String message) {
 		if (actual === null) {
 			if (unexpected === null) {
 				failEquals(message, null)
+			} // else: ok - they are not equal
+		} else {
+			if (actual.compareTo(unexpected) === 0) {
+				failEquals(message, actual)
 			}
 		}
+		return actual
+	}
+	
+	/**
+	 * Asserts that two {@link BigDecimal} objects are <b>not</b>equals based on the result of their
+	 * {@link BigDecimal#compareTo(BigDecimal) compareTo} method. 
+	 * If they are not, an {@link AssertionError} is thrown. 
+	 * 
+	 * If {@code actual} and {@code expected} both are {@code null}, they are considered equal.
+	 * 
+	 * @param actual the value to check against {@code unexpected}
+	 * @param unexpected unexpected value to check
+	 * @return actual for chaining
+	 */
+	def BigDecimal assertNotEquals(BigDecimal actual, BigDecimal unexpected) {
+		return actual.assertNotEquals(unexpected, null)
 	}
 
 	/**
