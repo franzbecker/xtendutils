@@ -336,9 +336,9 @@ class AssertionHelper {
 		Assert.assertTrue(message, condition)
 	}
 
-	/** Calls {@link Assert#assertTrue(boolean)} */
+	/** Calls {@link #assertTrue(boolean, String)} */
 	def void assertTrue(boolean condition) {
-		Assert.assertTrue(condition)
+		condition.assertTrue(null)
 	}
 
 	/** Calls {@link Assert#assertFalse(String, boolean)} */
@@ -346,9 +346,9 @@ class AssertionHelper {
 		Assert.assertFalse(message, condition)
 	}
 
-	/** Calls {@link Assert#assertFalse(boolean)} */
+	/** Calls {@link #assertFalse(boolean, String)} */
 	def void assertFalse(boolean condition) {
-		Assert.assertFalse(condition)
+		condition.assertFalse(null)
 	}
 
 	/** Calls {@link Assert#fail(String)} */
@@ -356,144 +356,228 @@ class AssertionHelper {
 		Assert.fail(message)
 	}
 
-	/** Calls {@link Assert#fail} */
+	/** Calls {@link #fail(String)} */
 	def void fail() {
-		Assert.fail
+		fail(null)
 	}
 
-	/** Calls {@link Assert#assertEquals(String, Object, Object)} */
-	def void assertEquals(Object actual, Object expected, String message) {
+	/** 
+	 * Calls {@link Assert#assertEquals(String, Object, Object)}
+	 * @return actual for chaining
+	 */
+	def Object assertEquals(Object actual, Object expected, String message) {
 		Assert.assertEquals(message, expected, actual)
+		return actual
 	}
 
-	/** Calls {@link Assert#assertEquals(Object, Object)} */
-	def void assertEquals(Object actual, Object expected) {
-		Assert.assertEquals(expected, actual)
+	/** 
+	 * Calls {@link #assertEquals(Object, Object, String)}
+	 * @return actual for chaining
+	 */
+	def Object assertEquals(Object actual, Object expected) {
+		return actual.assertEquals(expected, null)
 	}
 
-	/** Calls {@link Assert#assertNotEquals(String, Object, Object)} */
-	def void assertNotEquals(Object actual, Object unexpected, String message) {
+	/** 
+	 * Calls {@link Assert#assertNotEquals(String, Object, Object)}
+	 * @return actual for chaining
+	 */
+	def Object assertNotEquals(Object actual, Object unexpected, String message) {
 		Assert.assertNotEquals(message, unexpected, actual)
+		return actual
 	}
 
-	/** Calls {@link Assert#assertNotEquals(Object, Object)} */
-	def void assertNotEquals(Object actual, Object unexpected) {
-		Assert.assertNotEquals(unexpected, actual)
+	/** 
+	 * Calls {@link #assertNotEquals(Object, Object, String)}
+	 * @return actual for chaining
+	 */
+	def Object assertNotEquals(Object actual, Object unexpected) {
+		return actual.assertNotEquals(unexpected, null)
 	}
 
-	/** Calls {@link Assert#assertNotEquals(String, long, long)} */
-	def void assertNotEquals(long actual, long unexpected, String message) {
+	/** 
+	 * Calls {@link Assert#assertNotEquals(String, long, long)}
+	 * @return actual for chaining
+	 */
+	def long assertNotEquals(long actual, long unexpected, String message) {
 		Assert.assertNotEquals(message, unexpected, actual)
+		return actual
 	}
 
-	/** Calls {@link Assert#assertNotEquals(long, long)} */
-	def void assertNotEquals(long actual, long unexpected) {
-		Assert.assertNotEquals(unexpected, actual)
+	/** 
+	 * Calls {@link #assertNotEquals(long, long, String)}
+	 * @return actual for chaining
+	 */
+	def long assertNotEquals(long actual, long unexpected) {
+		return actual.assertNotEquals(unexpected, null)
 	}
 
-	/** Calls {@link Assert#assertNotEquals(String, double, double, double)} */
-	def void assertNotEquals(double actual, double unexpected, double delta, String message) {
+	/** 
+	 * Calls {@link Assert#assertNotEquals(String, double, double, double)}
+	 * @return actual for chaining
+	 */
+	def double assertNotEquals(double actual, double unexpected, double delta, String message) {
 		Assert.assertNotEquals(message, unexpected, actual, delta)
+		return actual
 	}
 
-	/** Calls {@link Assert#assertNotEquals(double, double, double)} */
-	def void assertNotEquals(double actual, double unexpected, double delta) {
-		Assert.assertNotEquals(unexpected, actual, delta)
+	/** 
+	 * Calls {@link #assertNotEquals(double, double, double, String)}
+	 * @return actual for chaining
+	 */
+	def double assertNotEquals(double actual, double unexpected, double delta) {
+		return actual.assertNotEquals(unexpected, delta, null)
 	}
 
-	/** Calls {@link Assert#assertNotEquals(String, float, float, float)} */
-	def void assertNotEquals(float actual, float unexpected, float delta, String message) {
+	/** 
+	 * Calls {@link Assert#assertNotEquals(String, float, float, float)}
+	 * @return actual for chaining
+	 */
+	def float assertNotEquals(float actual, float unexpected, float delta, String message) {
 		Assert.assertNotEquals(message, unexpected, actual, delta)
+		return actual
 	}
 
-	/** Calls {@link Assert#assertNotEquals(float, float, float)} */
-	def void assertNotEquals(float actual, float unexpected, float delta) {
-		Assert.assertNotEquals(unexpected, actual, delta)
+	/** 
+	 * Calls {@link #assertNotEquals(float, float, float, String)}
+	 * @return actual for chaining
+	 */
+	def float assertNotEquals(float actual, float unexpected, float delta) {
+		return actual.assertNotEquals(unexpected, delta, null)
 	}
 
-	/** Calls {@link Assert#assertEquals(String, double, double, double)} */
-	def void assertEquals(double actual, double expected, double delta, String message) {
+	/** 
+	 * Calls {@link Assert#assertEquals(String, double, double, double)}
+	 * @return actual for chaining
+	 */
+	def double assertEquals(double actual, double expected, double delta, String message) {
 		Assert.assertEquals(message, expected, actual, delta)
+		return actual
+	}
+	
+	/** 
+	 * Calls {@link #assertEquals(double, double, double, String)}
+	 * @return actual for chaining
+	 */
+	def double assertEquals(double actual, double expected, double delta) {
+		return actual.assertEquals(expected, delta, null)
 	}
 
-	/** Calls {@link Assert#assertEquals(String, float, float, float)} */
-	def void assertEquals(float actual, float expected, float delta, String message) {
+	/** 
+	 * Calls {@link Assert#assertEquals(String, float, float, float)}
+	 * @return actual for chaining
+	 */
+	def float assertEquals(float actual, float expected, float delta, String message) {
 		Assert.assertEquals(message, expected, actual, delta)
+		return actual
 	}
-
-	/** Calls {@link Assert#assertEquals(long, long)} */
-	def void assertEquals(long actual, long expected) {
-		Assert.assertEquals(expected, actual)
-	}
-
-	/** Calls {@link Assert#assertEquals(String, long, long)} */
-	def void assertEquals(long actual, long expected, String message) {
-		Assert.assertEquals(message, expected, actual)
-	}
-
-	/** Calls {@link Assert#assertEquals(double, double, double)} */
-	def void assertEquals(double actual, double expected, double delta) {
-		Assert.assertEquals(expected, actual, delta)
-	}
-
+	
 	/** Calls {@link Assert#assertEquals(float, float, float)} */
-	def void assertEquals(float actual, float expected, float delta) {
-		Assert.assertEquals(expected, actual, delta)
+	def float assertEquals(float actual, float expected, float delta) {
+		return actual.assertEquals(expected, delta, null)
 	}
 
-	/** Calls {@link Assert#assertNotNull(String, Object)} */
+	/** 
+	 * Calls {@link Assert#assertEquals(String, long, long)}
+	 * @return actual for chaining
+	 */
+	def long assertEquals(long actual, long expected, String message) {
+		Assert.assertEquals(message, expected, actual)
+		return actual
+	}
+	
+	/** Calls {@link #assertEquals(long, long, String)} */
+	def long assertEquals(long actual, long expected) {
+		return actual.assertEquals(expected, null)
+	}
+
+	/** 
+	 * Implements the check by itself since JUnit's {@link Assert#assertNotNull(Object)}
+	 * provides really unusable error messages.
+	 * 
+	 * @return object for chaining
+	 */
 	def <T> T assertNotNull(T object, String message) {
-		Assert.assertNotNull(message, object)
+		if (object === null) {
+			fail('''«message.withSpace»expected: <non-null> but was: <null>''')
+		}
 		return object
 	}
 
-	/** Calls {@link Assert#assertNotNull(Object)} */
+	/** Calls {@link #assertNotNull(Object, String)} */
 	def <T> T assertNotNull(T object) {
-		Assert.assertNotNull(object)
-		return object
+		return object.assertNotNull(null)
 	}
 
-	/** Calls {@link Assert#assertNull(String, Object)} */
+	/** 
+	 * Implements the check by itself to be consistent with respect to the error messages.
+	 */
 	def void assertNull(Object object, String message) {
-		Assert.assertNull(message, object)
+		if (object !== null) {
+			fail('''«message.withSpace»expected: <null> but was: <«object»>''')
+		}
 	}
 
-	/** Calls {@link Assert#assertNull(Object)} */
+	/** Calls {@link #assertNull(Object, String)} */
 	def void assertNull(Object object) {
-		Assert.assertNull(object)
+		object.assertNull(null)
 	}
 
-	/** Calls {@link Assert#assertSame(String, Object, Object)} */
-	def void assertSame(Object actual, Object expected, String message) {
+	/** 
+	 * Calls {@link Assert#assertSame(String, Object, Object)}
+	 * @return actual for chaining
+	 */
+	def Object assertSame(Object actual, Object expected, String message) {
 		Assert.assertSame(message, expected, actual)
+		return actual
 	}
 
-	/** Calls {@link Assert#assertSame(Object, Object)} */
-	def void assertSame(Object actual, Object expected) {
-		Assert.assertSame(expected, actual)
+	/** 
+	 * Calls {@link #assertSame(Object, Object, String)}
+	 * @return actual for chaining
+	 */
+	def Object assertSame(Object actual, Object expected) {
+		return actual.assertSame(expected, null)
 	}
 
-	/** Calls {@link Assert#assertNotSame(String, Object, Object)} */
-	def void assertNotSame(Object actual, Object unexpected, String message) {
+	/** 
+	 * Calls {@link Assert#assertNotSame(String, Object, Object)}
+	 * @return actual for chaining
+	 */
+	def Object assertNotSame(Object actual, Object unexpected, String message) {
 		Assert.assertNotSame(message, unexpected, actual)
+		return actual
 	}
 
-	/** Calls {@link Assert#assertNotSame(Object, Object)} */
-	def void assertNotSame(Object actual, Object unexpected) {
-		Assert.assertNotSame(unexpected, actual)
+	/** 
+	 * Calls {@link #assertNotSame(Object, Object, String)} 
+	 * @return actual for chaining
+	 */
+	def Object assertNotSame(Object actual, Object unexpected) {
+		return actual.assertNotSame(unexpected, null)
 	}
 
 	/**
 	 * Method from {@link Assert} converted to Xtend since it is package private and not accessible.
 	 */
-	protected def String format(String messageObj, Object actual, Object expected) {
-		val message = if (messageObj.nullOrEmpty) "" else ( messageObj + " ")
+	protected def String format(String message, Object actual, Object expected) {
 		val expectedString = String.valueOf(expected)
 		val actualString = String.valueOf(actual)
 		if (expectedString == actualString) {
-			return '''«message»expected: «expected.formatClassAndValue» but was: «actual.formatClassAndValue»'''
+			return '''«message.withSpace»expected: «expected.formatClassAndValue» but was: «actual.formatClassAndValue»'''
 		} else {
-			return '''«message»expected: <«expected»> but was: <«actual»>'''
+			return '''«message.withSpace»expected: <«expected»> but was: <«actual»>'''
+		}
+	}
+	
+	/**
+	 * @return {@code ""} if message is {@code null} or empty, {@code message + " "} otherwise.
+	 */
+	protected def String withSpace(String message) {
+		if (message.nullOrEmpty) {
+			return ""
+		} else {
+			return message + " "
 		}
 	}
 

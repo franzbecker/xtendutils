@@ -306,14 +306,14 @@ class AssertionHelperTest extends AbstractTest {
 		val y = new BigDecimal("6.1")
 
 		// When + Then
-		x.assertEquals(x).assertSame(x); // test chaining as well
+		x.assertEquals(x);
 		[x.assertEquals(y)].assertFail(AssertionError) => [
 			message.assertEquals("expected: <6.1> but was: <5.1>")
 		]
 		[x.assertEquals(y, "Oops")].assertFail(AssertionError) => [
 			message.assertEquals("Oops expected: <6.1> but was: <5.1>")
 		]
-		x.assertNotEquals(y).assertSame(x); // test chaining as well
+		x.assertNotEquals(y);
 		[x.assertNotEquals(x, "Oops")].assertFail(AssertionError) => [
 			message.assertEquals("Oops. Actual: 5.1")
 		]
@@ -351,6 +351,50 @@ class AssertionHelperTest extends AbstractTest {
 		format("", "actual", "expected").assertEquals("expected: <expected> but was: <actual>")
 		format("message", "actual", "expected").assertEquals("message expected: <expected> but was: <actual>")
 		format("message", 5, new BigDecimal("5")).assertEquals("message expected: java.math.BigDecimal<5> but was: java.lang.Integer<5>")
+	}
+
+	/**
+	 * Test the chaining for assertEquals and assertNotEquals.
+	 */
+	@Test
+	def void testChainingAssertEquals() {
+		// Given
+		val aLong = 1l
+		val aFloat = 2f
+		val aDouble = 3d
+		val aBigDecimal = 4bd
+		val anObject = new Object
+		
+		// When + Then
+		// assertEquals
+		assertTrue(aLong.assertEquals(aLong) === aLong)
+		assertTrue(aFloat.assertEquals(aFloat, 0f) === aFloat)
+		assertTrue(aDouble.assertEquals(aDouble, 0d) === aDouble)
+		aBigDecimal.assertEquals(aBigDecimal).assertSame(aBigDecimal)
+		anObject.assertEquals(anObject).assertSame(anObject)
+		
+		// assertNotEquals
+		assertTrue(aLong.assertNotEquals(-1) === aLong)
+		assertTrue(aFloat.assertNotEquals(-1f, 0f) === aFloat)
+		assertTrue(aDouble.assertNotEquals(-1f, 0d) === aDouble)
+		aBigDecimal.assertNotEquals(-1bd).assertSame(aBigDecimal)
+		anObject.assertNotEquals(new Object).assertSame(anObject)
+	}
+	
+	@Test
+	def void testAssertNullAndAssertNotNull() {
+		// Given
+		val obj = "xyz"
+		
+		// When + Then
+		null.assertNull;
+		[obj.assertNull("Oops")].assertFail(AssertionError) => [
+			message.assertEquals("Oops expected: <null> but was: <xyz>")
+		]
+		obj.assertNotNull.assertSame(obj); // test chaining as well
+		[null.assertNotNull("Oops")].assertFail(AssertionError) => [
+			message.assertEquals("Oops expected: <non-null> but was: <null>")
+		]
 	}
 
 	// TODO more tests!
