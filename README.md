@@ -8,8 +8,12 @@ This is a collection of stuff I implemented for Xtend (currently 2.8.2) and find
 Feel free to copy&paste parts into your project or send me a pull request if you have useful enhancements.
 
 
-AssertionHelper
----------------
+## JUnit ##
+`de.xtendutils.junit`
+This package provides utilities for unit testing.
+
+### AssertionHelper ###
+-----------------------
 In Xtend it is possible to use extension methods that allow us to "add" new methods to existing types without modifying them. 
 In testing this becomes quite handy since we can "add" the assertion methods to the types we want to test.
 
@@ -56,3 +60,13 @@ In AssertJ with Java 8 you would write:
 		.isInstanceOf(ArithmeticException.class)
 		.hasMessage("Division by zero");
 ```
+
+Note that the methods of `AssertionHelper` are non-static. This feels kind of strange but is has one major advantage which I found superior: we can declare it as an [extension](https://eclipse.org/xtend/documentation/202_xtend_classes_members.html#extension-methods) [provider](http://blog.efftinge.de/2013/06/xtends-extension-providers.html) in a super class of all our tests.
+This way we don't need to add a static import everytime we create a new test class and also could exchange the implementation in the future.
+
+## Lib ##
+`de.xtendutils.lib`
+This package provides utilities for the standard Java library.
+
+### Extensions ###
+Xtend already comes with a great default for extension methods. This package contains some more extensions that can be included on demand.
