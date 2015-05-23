@@ -19,9 +19,7 @@ import org.junit.Test
  * First, assertFail and assertEquals are tested which are then used to test the
  * other methods.
  */
-class AssertionHelperTest {
-
-	extension AssertionHelper = AssertionHelper.instance
+class AssertionHelperTest extends AbstractTest {
 
 	/**
 	 * Trick the compiler.
