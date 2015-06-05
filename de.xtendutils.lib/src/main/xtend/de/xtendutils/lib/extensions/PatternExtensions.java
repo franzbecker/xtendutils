@@ -65,7 +65,7 @@ public class PatternExtensions {
 	 * Returns {@code true} if any of the given patterns matches against the input, {@code false}
 	 * if none matches, the input was {@code null} or the list patterns was empty.
 	 * <p/>
-	 * Method is null-safe for the passed character sequence, pattern may not be {@code null}.
+	 * Method is null-safe for the passed character sequence, the patterns may not be {@code null}.
 	 * 
 	 * @param input the character sequence to be matched, may be {@code null}.
 	 * @param patterns the pattern to be matched against, may not be {@code null}. 
@@ -77,12 +77,34 @@ public class PatternExtensions {
 			return false;
 		}
 		for (Pattern pattern : patterns) {
-			Matcher matcher = pattern.matcher(input);
-			if (matcher.find()) {
+			if (matches(input, pattern)) {
 				return true;
 			}
 		}
 		return false;
 	}
 	
+	/**
+	 * Returns {@code true} if all of the given patterns matches against the input (or the input was empty), 
+	 * {@code false} if at least one does not match or the input was {@code null}.
+	 * <p/>
+	 * Method is null-safe for the passed character sequence, the patterns may not be {@code null}.
+	 * 
+	 * @param input the character sequence to be matched, may be {@code null}.
+	 * @param patterns the pattern to be matched against, may not be {@code null}. 
+	 * @return {@code true} if all of the given patterns matches against the input (or the input was empty), 
+	 * 			{@code false} if at least one does not match or the input was {@code null}.
+	 */
+	public static boolean matchesAll(@Nullable CharSequence input, Pattern... patterns) {
+		if (input == null) {
+			return false;
+		}
+		for (Pattern pattern : patterns) {
+			if (!matches(input, pattern)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 }
