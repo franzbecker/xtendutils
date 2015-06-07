@@ -43,8 +43,8 @@ public class PatternExtensions {
 	}
 	
 	/**
-	 * Returns {@code true} if the pattern matches against the input, {@code false} if not
-	 * or if the input was {@code null}.
+	 * Returns {@code true} if the input matches the given regular expression, 
+	 * {@code false} if not or if the input was {@code null}.
 	 * <p/>
 	 * Method is null-safe for the passed character sequence, pattern may not be {@code null}.
 	 * 
@@ -52,13 +52,14 @@ public class PatternExtensions {
 	 * @param pattern the pattern to be matched against, may not be {@code null}. 
 	 * @return {@code true} if the pattern matches against the input, {@code false} if not
 	 * 			or if the input was {@code null}.
+	 * 
+	 * @see String#matches(String)
 	 */
 	public static boolean matches(@Nullable CharSequence input, Pattern pattern) {
 		if (input == null) {
 			return false;
 		}
-		Matcher matcher = pattern.matcher(input);
-		return matcher.find();
+		return pattern.matcher(input).matches();
 	}
 	
 	/**

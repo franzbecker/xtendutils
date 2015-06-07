@@ -39,6 +39,7 @@ class PatternExtensionsTest {
 		// When + Then
 		" ".matches(pattern).assertTrue
 		"x".matches(pattern).assertFalse
+		" x".matches(pattern).assertFalse
 		null.matches(pattern).assertFalse
 	}
 
