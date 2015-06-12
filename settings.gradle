@@ -1,0 +1,6 @@
+rootProject.name = 'de.xtendutils'
+include ':de.xtendutils.junit'
+include ':de.xtendutils.lib'
+
+project(':de.xtendutils.junit').projectDir = "$rootDir/de.xtendutils.junit" as File
+project(':de.xtendutils.lib').projectDir = "$rootDir/de.xtendutils.lib" as File

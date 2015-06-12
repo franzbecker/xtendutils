@@ -1,0 +1,53 @@
+plugins {
+	id "org.xtend.xtend" version "0.4.7"
+}
+
+allprojects {
+	apply plugin: "maven"
+	group = "de.xtendutils"
+	version = "0.0.1-SNAPSHOT"
+}
+
+subprojects {
+	apply plugin: "org.xtend.xtend"
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
+	
+	project.ext {
+		/* Configure versions that are either likely to change or need to be reused. */
+		versions = [
+			xtend: "2.8+",
+			junit: "4.12"
+		]
+	}
+	
+	dependencies {
+		compile "org.eclipse.xtend:org.eclipse.xtend.lib:${versions.xtend}"
+		compile "com.google.code.findbugs:jsr305:3.0.0"
+		compile "com.google.inject:guice:4.0"
+		testCompile "junit:junit:${versions.junit}"
+		testCompile "org.assertj:assertj-core:3.0.0"
+		
+		// Provide de.xtendutils.junit as a test-dependency to every other subproject
+		if (project.name != "de.xtendutils.junit") {
+			testCompile project(':de.xtendutils.junit')
+		}
+	}
+	
+	sourceSets {
+  		main.xtendOutputDir = "src/main/xtend-gen"
+  		test.xtendOutputDir = "src/test/xtend-gen"
+	}
+	
+	repositories {
+		mavenLocal()
+		maven { url "https://repo.maven.apache.org/maven2" }
+	}
+
+	// TODO should be removed eventually	
+	test {
+    	afterTest { desc, result -> 
+        	println "  Executing test ${desc.name} [${desc.className}] with result: ${result.resultType}"
+    	}
+	}
+}
