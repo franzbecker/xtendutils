@@ -9,9 +9,14 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import org.eclipse.xtext.xbase.lib.Inline;
 import org.eclipse.xtext.xbase.lib.Pure;
 
+import com.google.common.annotations.Beta;
+
 /**
  * This is an extension library for {@link Pattern}.
+ * 
+ * Inspired by {@code org.codehaus.groovy.runtime.StringGroovyMethods}.
  */
+@Beta
 @ParametersAreNonnullByDefault
 public class PatternExtensions {
 
@@ -29,6 +34,18 @@ public class PatternExtensions {
 	}
 	
 	/**
+	 * Returns a compiled {@link Pattern} with the given regex.
+	 * 
+	 * @param regex may not be {@code null}.
+	 * @return the compiled {@link Pattern}.
+	 */
+	@Pure
+	@Inline(value="Pattern.compile($1)", imported=Pattern.class)
+	public static Pattern compile(String regex) {
+		return Pattern.compile(regex);
+	}
+	
+	/**
 	 * Returns a compiled {@link Pattern} with the given regex and flags.
 	 * In contrast to {@link Pattern#compile(String, int)} passing {@link CharSequence} is supported.
 	 * 
@@ -40,6 +57,19 @@ public class PatternExtensions {
 	@Inline(value="Pattern.compile($1.toString(), $2)", imported=Pattern.class)
 	public static Pattern compile(CharSequence regex, int flags) {
 		return Pattern.compile(regex.toString(), flags);
+	}
+	
+	/**
+	 * Returns a compiled {@link Pattern} with the given regex and flags.
+	 * 
+	 * @param regex may not be {@code null}.
+	 * @param flags see {@link Pattern#compile(String, int)}.
+	 * @return the compiled {@link Pattern}.
+	 */
+	@Pure
+	@Inline(value="Pattern.compile($1, $2)", imported=Pattern.class)
+	public static Pattern compile(String regex, int flags) {
+		return Pattern.compile(regex, flags);
 	}
 	
 	/**
