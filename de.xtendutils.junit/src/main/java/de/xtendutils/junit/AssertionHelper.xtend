@@ -10,10 +10,11 @@
 package de.xtendutils.junit
 
 import java.math.BigDecimal
+import java.util.Optional
+import javax.annotation.Nonnull
 import javax.annotation.ParametersAreNullableByDefault
 import javax.inject.Singleton
 import org.junit.Assert
-import javax.annotation.Nonnull
 
 // TODO proper comment, old one was not good enough
 /**
@@ -61,11 +62,11 @@ class AssertionHelper {
 	 */
 	def void assertEmpty(Iterable<?> iterable, String message) {
 		if (iterable === null) {
-			Assert.fail(message.format(null, "empty iterable"))
+			fail(message.format(null, "empty iterable"))
 		}
 		if (!iterable.empty) {
 			val size = iterable.size
-			Assert.fail(message.format(size.elementsString, "empty iterable"))
+			fail(message.format(size.elementsString, "empty iterable"))
 		}
 	}
 
@@ -90,10 +91,10 @@ class AssertionHelper {
 	 */
 	def <T> Iterable<T> assertNotEmpty(Iterable<T> iterable, String message) {
 		if (iterable === null) {
-			Assert.fail(message.format(null, "non-empty iterable"))
+			fail(message.format(null, "non-empty iterable"))
 		}
 		if (iterable.empty) {
-			Assert.fail(message.format("empty", "non-empty iterable"))
+			fail(message.format("empty", "non-empty iterable"))
 		}
 		return iterable
 	}
@@ -145,11 +146,11 @@ class AssertionHelper {
 	 */
 	def <T> Iterable<T> assertSize(Iterable<T> iterable, int expectedSize, String message) {
 		if (iterable === null) {
-			Assert.fail(message.format(null, expectedSize.elementsString))
+			fail(message.format(null, expectedSize.elementsString))
 		}
 		val size = iterable.size
 		if (size !== expectedSize) {
-			Assert.fail(message.format(size.elementsString, expectedSize.elementsString))
+			fail(message.format(size.elementsString, expectedSize.elementsString))
 		}
 		return iterable
 	}
@@ -180,10 +181,10 @@ class AssertionHelper {
 			throw new IllegalArgumentException("The passed type may not be null.")
 		}
 		if (object === null) {
-			Assert.fail(message.format(null, type.name))
+			fail(message.format(null, type.name))
 		}
 		if (!(type.isAssignableFrom(object.class))) {
-			Assert.fail(message.format(object.class.name, type.name))
+			fail(message.format(object.class.name, type.name))
 		}
 		return object as T
 	}
@@ -203,11 +204,11 @@ class AssertionHelper {
 	def BigDecimal assertEquals(BigDecimal actual, BigDecimal expected, String message) {
 		if (actual === null) {
 			if (expected !== null) {
-				Assert.fail(message.format(actual, expected))
+				fail(message.format(actual, expected))
 			}
 		} else {
 			if (actual.compareTo(expected) !== 0) {
-				Assert.fail(message.format(actual, expected))
+				fail(message.format(actual, expected))
 			}
 		}
 		return actual
@@ -295,7 +296,7 @@ class AssertionHelper {
 		} catch (Throwable actual) {
 			return actual.assertInstanceOf(throwableClass)
 		}
-		Assert.fail(message.format("no exception", throwableClass.name))
+		fail(message.format("no exception", throwableClass.name))
 		throw new IllegalStateException // dead code
 	}
 
@@ -324,7 +325,53 @@ class AssertionHelper {
 		} catch (Throwable actual) {
 			return actual.assertInstanceOf(throwableClass)
 		}
-		Assert.fail(message.format("no exception", throwableClass.name))
+		fail(message.format("no exception", throwableClass.name))
+		throw new IllegalStateException // dead code
+	}
+	
+	/**
+	 * Asserts that the passed Optional is absent.
+	 * If it isn't it throws an {@link AssertionError}.
+	 * 
+	 * @param optional the Optional to be checked
+	 */
+	def <T> void assertAbsent(Optional<T> optional) {
+		optional.assertAbsent(null)
+	}
+	
+	/**
+	 * Asserts that the passed Optional is absent.
+	 * If it isn't it throws an {@link AssertionError} with the given message.
+	 * 
+	 * @param optional the Optional to be checked
+	 */
+	def <T> void assertAbsent(Optional<T> optional, String message) {
+		if (optional.present) {
+			fail(message.format(optional.get, Optional.empty))
+		}
+	}
+	
+	/**
+	 * Asserts that the passed Optional is present.
+	 * If it isn't it throws an {@link AssertionError}.
+	 * 
+	 * @param optional the Optional to be checked
+	 */
+	def <T> T assertPresent(Optional<T> optional) {
+		return optional.assertPresent(null)
+	}
+	
+	/**
+	 * Asserts that the passed Optional is present.
+	 * If it isn't it throws an {@link AssertionError} with the given message.
+	 * 
+	 * @param optional the Optional to be checked
+	 */
+	def <T> T assertPresent(Optional<T> optional, String message) {
+		if (optional.present) {
+			return optional.get
+		}
+		fail(message.format(Optional.empty, "a value"))
 		throw new IllegalStateException // dead code
 	}
 

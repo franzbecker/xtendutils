@@ -10,6 +10,7 @@
 package de.xtendutils.junit
 
 import java.math.BigDecimal
+import java.util.Optional
 import org.junit.Assert
 import org.junit.Test
 
@@ -394,6 +395,23 @@ class AssertionHelperTest extends AbstractTest {
 		obj.assertNotNull.assertSame(obj); // test chaining as well
 		[null.assertNotNull("Oops")].assertFail(AssertionError) => [
 			message.assertEquals("Oops expected: <non-null> but was: <null>")
+		]
+	}
+	
+	@Test
+	def void testAssertAbsentAndPresent() {
+		// Given 
+		val present = Optional.of("x")
+		val absent = Optional.empty
+		
+		// When + Then
+		present.assertPresent
+		absent.assertAbsent;
+		[present.assertAbsent("Oops")].assertFail(AssertionError) => [
+			message.assertEquals("Oops expected: <Optional.empty> but was: <x>")
+		]
+		[absent.assertPresent("Oops")].assertFail(AssertionError) => [
+			message.assertEquals("Oops expected: <a value> but was: <Optional.empty>")
 		]
 	}
 
