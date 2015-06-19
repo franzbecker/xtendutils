@@ -1,11 +1,11 @@
 plugins {
 	id "org.xtend.xtend" version "0.4.7"
+	id 'net.researchgate.release' version '2.1.2'
 }
 
 allprojects {
 	apply plugin: "maven"
 	group = "de.xtendutils"
-	version = "0.0.1-SNAPSHOT"
 }
 
 subprojects {
