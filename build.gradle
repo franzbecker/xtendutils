@@ -5,8 +5,28 @@ plugins {
 }
 
 allprojects {
+	repositories {
+		jcenter()
+	}
+
 	apply plugin: "maven"
 	group = "de.xtendutils"
+
+	apply plugin: "com.jfrog.bintray"
+	bintray {
+		user = System.getenv('BINTRAY_USER')
+		key = System.getenv('BINTRAY_KEY')
+		configurations = ['archives']
+		pkg {
+			repo = 'maven'
+			name = 'xtendutils'
+			licenses = ['EPL-1.0']
+			vcsUrl = 'https://github.com/franzbecker/xtendutils.git'
+			version {
+				name = "${project.version}"
+			}
+		}
+	}
 }
 
 subprojects {
@@ -30,18 +50,14 @@ subprojects {
 		testCompile "org.assertj:assertj-core:3.0.0"
 
 		// Provide de.xtendutils.junit as a test-dependency to every other subproject
-		if (project.name != "de.xtendutils.junit") {
-			testCompile project(':de.xtendutils.junit')
+		if (project.name != "junit") {
+			testCompile project(':junit')
 		}
 	}
 
 	sourceSets {
   		main.xtendOutputDir = "src/main/xtend-gen"
   		test.xtendOutputDir = "src/test/xtend-gen"
-	}
-
-	repositories {
-		jcenter()
 	}
 
 	task sourcesJar(type: Jar, dependsOn: classes) {
@@ -53,21 +69,6 @@ subprojects {
 		archives sourcesJar
 	}
 
-	bintray {
-	    user = System.getenv('BINTRAY_USER')
-	    key = System.getenv('BINTRAY_KEY')
-		configurations = ['archives']
-		pkg {
-			repo = 'maven'
-			name = 'xtendutils'
-			licenses = ['EPL-1.0']
-			vcsUrl = 'https://github.com/franzbecker/xtendutils.git'
-			version {
-				name = "${project.version}"
-			}
-		}
-	}
-
 	// TODO should be removed eventually
 	test {
     	afterTest { desc, result ->
@@ -75,4 +76,16 @@ subprojects {
     	}
 	}
 
+}
+
+/*
+ * Configure release plugin.
+ * Remove tasks "updateVersion" and "commitNewVersion" as we don't want the new SNAPSHOT
+ * version commit on the master branch.
+ */
+tasks['release'].tasks -= ["updateVersion", "commitNewVersion"]
+release {
+	preTagCommitMessage = '[release] - pre tag commit: '
+	tagCommitMessage = '[release] - creating tag: '
+	newVersionCommitMessage = '[release] - new version commit: '
 }
