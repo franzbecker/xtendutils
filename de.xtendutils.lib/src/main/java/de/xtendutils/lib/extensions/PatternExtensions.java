@@ -1,6 +1,5 @@
 package de.xtendutils.lib.extensions;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.annotation.Nullable;
