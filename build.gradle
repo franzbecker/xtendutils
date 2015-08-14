@@ -1,6 +1,7 @@
 plugins {
 	id "org.xtend.xtend" version "0.4.8"
 	id "net.researchgate.release" version "2.2.0"
+	id "com.jfrog.bintray" version "1.2"
 }
 
 allprojects {
@@ -40,8 +41,7 @@ subprojects {
 	}
 
 	repositories {
-		mavenLocal()
-		maven { url "https://repo.maven.apache.org/maven2" }
+		jcenter()
 	}
 
 	task sourcesJar(type: Jar, dependsOn: classes) {
@@ -51,6 +51,21 @@ subprojects {
 
 	artifacts {
 		archives sourcesJar
+	}
+
+	bintray {
+	    user = System.getenv('BINTRAY_USER')
+	    key = System.getenv('BINTRAY_KEY')
+		configurations = ['archives']
+		pkg {
+			repo = 'maven'
+			name = 'xtendutils'
+			licenses = ['EPL-1.0']
+			vcsUrl = 'https://github.com/franzbecker/xtendutils.git'
+			version {
+				name = "${project.version}"
+			}
+		}
 	}
 
 	// TODO should be removed eventually
