@@ -1,6 +1,6 @@
 plugins {
-	id "org.xtend.xtend" version "0.4.7"
-	id 'net.researchgate.release' version '2.1.2'
+	id "org.xtend.xtend" version "0.4.8"
+	id "net.researchgate.release" version "2.2.0"
 }
 
 allprojects {
@@ -17,7 +17,7 @@ subprojects {
 		/* Configure versions that are either likely to change or need to be reused. */
 		versions = [
 			xtend: "2.8+",
-			junit: "4.12"
+			junit: "4.12+"
 		]
 	}
 
