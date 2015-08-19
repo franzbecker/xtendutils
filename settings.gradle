@@ -1,6 +1,5 @@
-rootProject.name = 'all'
 include ':junit'
 include ':lib'
 
-project(':junit').projectDir = "$rootDir/de.xtendutils.junit" as File
-project(':lib').projectDir = "$rootDir/de.xtendutils.lib" as File
+project(':junit').projectDir = "$rootDir/junit" as File
+project(':lib').projectDir = "$rootDir/lib" as File
