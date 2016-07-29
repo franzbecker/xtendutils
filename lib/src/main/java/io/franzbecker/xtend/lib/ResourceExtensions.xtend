@@ -1,4 +1,4 @@
-package de.xtendutils.lib.extensions
+package io.franzbecker.xtend.lib
 
 import com.google.common.annotations.Beta
 import com.google.common.io.Files

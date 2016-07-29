@@ -13,7 +13,7 @@ allprojects {
 subprojects {
 	apply plugin: "org.xtend.xtend"
 	apply plugin: "maven"
-	group = "de.xtendutils"
+	group = "io.franzbecker.xtend"
 
 	apply plugin: "com.jfrog.bintray"
 	bintray {

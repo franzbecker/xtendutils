@@ -1,10 +1,10 @@
-package de.xtendutils.junit
+package io.franzbecker.xtend.junit
 
 /**
  * Super class for all tests that provides {@link AssertionHelper}.
  */
-class AbstractTest {
-	
+abstract class AbstractTest {
+
 	protected extension AssertionHelper = AssertionHelper.instance
-	
+
 }

@@ -1,4 +1,4 @@
-package de.xtendutils.lib.extensions;
+package io.franzbecker.xtend.lib;
 
 import java.util.regex.Pattern;
 

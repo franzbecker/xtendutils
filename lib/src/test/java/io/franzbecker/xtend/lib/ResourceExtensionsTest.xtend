@@ -1,8 +1,8 @@
-package de.xtendutils.lib.extensions
+package io.franzbecker.xtend.lib
 
 import com.google.common.base.Strings
 import com.google.common.io.Files
-import de.xtendutils.junit.AssertionHelper
+import io.franzbecker.xtend.junit.AssertionHelper
 import java.io.File
 import java.util.UUID
 import org.junit.Rule
@@ -11,7 +11,7 @@ import org.junit.rules.TemporaryFolder
 
 import static java.nio.charset.StandardCharsets.*
 
-import static extension de.xtendutils.lib.extensions.ResourceExtensions.*
+import static extension io.franzbecker.xtend.lib.ResourceExtensions.*
 
 class ResourceExtensionsTest {
 
@@ -29,29 +29,29 @@ class ResourceExtensionsTest {
 		// expect
 		file.text.assertEquals(HELLO_WORLD)
 	}
-	
+
 	@Test
 	def void setTextOnNonExistingFile() {
 		// given
 		val file = new File(tempFolder.root, 'text.txt')
 		file.exists.assertFalse
-		
+
 		// when
 		file.text = HELLO_WORLD
-		
+
 		// then
 		file.text.assertEquals(HELLO_WORLD)
 	}
-	
+
 	@Test
 	def void setTextOnPrefilledFile() {
 		// given
 		val file = tempFolder.newFile('test.txt')
 		Files.newWriter(file, UTF_8).append(UUID.randomUUID.toString).close
-		
+
 		// when
 		file.text = HELLO_WORLD
-		
+
 		// then
 		file.text.assertEquals(HELLO_WORLD)
 	}

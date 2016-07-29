@@ -1,12 +1,11 @@
-package de.xtendutils.lib.extensions
+package io.franzbecker.xtend.lib
 
-import de.xtendutils.junit.AssertionHelper
-import de.xtendutils.lib.extensions.PatternExtensions
+import io.franzbecker.xtend.junit.AssertionHelper
 import org.junit.Test
 
 import static java.util.regex.Pattern.CASE_INSENSITIVE
 
-import static extension de.xtendutils.lib.extensions.PatternExtensions.*
+import static extension io.franzbecker.xtend.lib.PatternExtensions.*
 
 /**
  * Tests for {@link PatternExtensions}.

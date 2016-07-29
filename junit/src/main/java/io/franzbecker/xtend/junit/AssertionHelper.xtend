@@ -7,7 +7,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package de.xtendutils.junit
+package io.franzbecker.xtend.junit
 
 import java.math.BigDecimal
 import java.util.Optional
