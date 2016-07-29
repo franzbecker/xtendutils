@@ -9,7 +9,7 @@ This is a collection of stuff I implemented for Xtend (currently 2.8.4) and find
 Ideas for enhancements or different approaches are more than welcome, just create a ticket or send me a pull request.
 
 ## JUnit ##
-`de.xtendutils.junit`
+`io.franzbecker.xtend.junit`
 This package provides utilities for unit testing.
 
 ### AssertionHelper ###
@@ -63,7 +63,7 @@ Note that the methods of `AssertionHelper` are non-static. This feels kind of st
 This way we don't need to add a static import everytime we create a new test class and also could exchange the implementation in the future.
 
 ## Lib ##
-`de.xtendutils.lib`
+`io.franzbecker.xtend.lib`
 This package provides utilities for the standard Java library.
 
 ### Extensions ###

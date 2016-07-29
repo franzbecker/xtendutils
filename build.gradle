@@ -38,7 +38,7 @@ subprojects {
 		testCompile "junit:junit:$versions.junit"
 		testCompile 'org.assertj:assertj-core:3.0.0'
 
-		// Provide de.xtendutils.junit as a test-dependency to every other subproject
+		// Provide junit project as a test-dependency to every other subproject
 		if (project.name != 'junit') {
 			testCompile project(':junit')
 		}
