@@ -1,0 +1,63 @@
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+artifacts {
+    archives sourcesJar, javadocJar
+}
+
+apply plugin: 'com.jfrog.bintray'
+bintray {
+	user = System.getenv('BINTRAY_USER')
+	key = System.getenv('BINTRAY_KEY')
+	configurations = ['archives']
+	pkg {
+		repo = 'maven'
+		name = 'xtendutils'
+		licenses = ['EPL-1.0']
+		labels = ['xtend', 'junit', 'test']
+		websiteUrl = "https://github.com/franzbecker/xtendutils"
+		issueTrackerUrl = "$websiteUrl/issues"
+		vcsUrl = "${websiteUrl}.git"
+		version {
+			name = project.version
+			vcsTag = "v$project.version"
+		}
+	}
+}
+
+// Properties required by Maven central
+install {
+	repositories.mavenInstaller.pom {
+		name = "${project.group}.${project.name}"
+		description = 'Utility classes for Xtend'
+		project {
+			url bintray.pkg.websiteUrl
+			licenses {
+				license {
+					name 'Eclipse Public License, Version 1.0'
+					url 'https://www.eclipse.org/legal/epl-v10.html'
+				}
+			}
+			scm {
+				connection "scm:git:git@github.com:${githubRepo}.git"
+				developerConnection "scm:git:git@github.com:${githubRepo}.git"
+				url "git@github.com:${githubRepo}.git"
+			}
+			developers {
+				developer {
+					name 'Franz Becker'
+					email 'github@franzbecker.io'
+					organization = 'itemis AG'
+					organizationUrl 'http://www.itemis.com'
+				}
+			}
+		}
+	}
+}

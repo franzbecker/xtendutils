@@ -19,7 +19,7 @@ import org.junit.Assert
 // TODO proper comment, old one was not good enough
 /**
  * 
- * <p>Note that Eclipse users can easily filter the stack trace of this class:<br/>
+ * <p>Note that Eclipse users can easily filter the stack trace of this class:<br>
  * Preferences - Java - JUnit - Add Class - and pick this class.</p>
  */
 @Singleton

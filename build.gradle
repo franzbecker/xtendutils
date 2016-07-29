@@ -1,7 +1,12 @@
+buildscript {
+  dependencies {
+    classpath 'org.xtext:xtext-gradle-plugin:1.0.4'
+  }
+}
+
 plugins {
-	id "org.xtend.xtend" version "0.4.8"
-	id "net.researchgate.release" version "2.2.0"
-	id "com.jfrog.bintray" version "1.2"
+	id 'net.researchgate.release' version '2.2.0'
+	id 'com.jfrog.bintray' version '1.7'
 }
 
 allprojects {
@@ -11,69 +16,37 @@ allprojects {
 }
 
 subprojects {
-	apply plugin: "org.xtend.xtend"
-	apply plugin: "maven"
-	group = "io.franzbecker.xtend"
+	apply plugin: 'org.xtext.xtend'
+	apply plugin: 'maven'
+	group = 'io.franzbecker.xtend'
 
-	apply plugin: "com.jfrog.bintray"
-	bintray {
-		user = System.getenv('BINTRAY_USER')
-		key = System.getenv('BINTRAY_KEY')
-		configurations = ['archives']
-		pkg {
-			repo = 'maven'
-			name = 'xtendutils'
-			licenses = ['EPL-1.0']
-			vcsUrl = 'https://github.com/franzbecker/xtendutils.git'
-			version {
-				name = "${project.version}"
-			}
-		}
-	}
+	ext.githubRepo = 'franzbecker/xtendutils'
+	ext.versions = [
+		xtend: '2.10.0',
+		junit: '4.12'
+	]
+
+	apply from: "$rootDir/gradle/publishing.gradle"
 
 	sourceCompatibility = 1.8
 	targetCompatibility = 1.8
 
-	project.ext {
-		/* Configure versions that are either likely to change or need to be reused. */
-		versions = [
-			xtend: "2.8+",
-			junit: "4.12+"
-		]
-	}
-
 	dependencies {
-		compile "org.eclipse.xtend:org.eclipse.xtend.lib:${versions.xtend}"
-		compile "com.google.code.findbugs:jsr305:3.0.0"
-		compile "com.google.inject:guice:4.0"
-		testCompile "junit:junit:${versions.junit}"
-		testCompile "org.assertj:assertj-core:3.0.0"
+		compile "org.eclipse.xtend:org.eclipse.xtend.lib:$versions.xtend"
+		compile 'com.google.code.findbugs:jsr305:3.0.0'
+		compile 'com.google.inject:guice:4.0'
+		testCompile "junit:junit:$versions.junit"
+		testCompile 'org.assertj:assertj-core:3.0.0'
 
 		// Provide de.xtendutils.junit as a test-dependency to every other subproject
-		if (project.name != "junit") {
+		if (project.name != 'junit') {
 			testCompile project(':junit')
 		}
 	}
 
 	sourceSets {
-  		main.xtendOutputDir = "src/main/xtend-gen"
-  		test.xtendOutputDir = "src/test/xtend-gen"
-	}
-
-	task sourcesJar(type: Jar, dependsOn: classes) {
-		classifier 'sources'
-		from sourceSets.main.allSource
-	}
-
-	artifacts {
-		archives sourcesJar
-	}
-
-	// TODO should be removed eventually
-	test {
-    	afterTest { desc, result ->
-        	println "  Executing test ${desc.name} [${desc.className}] with result: ${result.resultType}"
-    	}
+  		main.xtendOutputDir = 'src/main/xtend-gen'
+  		test.xtendOutputDir = 'src/test/xtend-gen'
 	}
 
 }
@@ -83,7 +56,7 @@ subprojects {
  * Remove tasks "updateVersion" and "commitNewVersion" as we don't want the new SNAPSHOT
  * version commit on the master branch.
  */
-tasks.release.tasks -= ["updateVersion", "commitNewVersion"]
+tasks.release.tasks -= ['updateVersion', 'commitNewVersion']
 release {
 	preTagCommitMessage = '[release] - pre tag commit: '
 	tagCommitMessage = '[release] - creating tag: '

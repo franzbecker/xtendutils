@@ -74,8 +74,9 @@ public class PatternExtensions {
 	/**
 	 * Returns {@code true} if the input matches the given regular expression, 
 	 * {@code false} if not or if the input was {@code null}.
-	 * <p/>
+	 * <p>
 	 * Method is null-safe for the passed character sequence, pattern may not be {@code null}.
+	 * </p>
 	 * 
 	 * @param input the character sequence to be matched, may be {@code null}.
 	 * @param pattern the pattern to be matched against, may not be {@code null}. 
@@ -94,9 +95,9 @@ public class PatternExtensions {
 	/**
 	 * Returns {@code true} if any of the given patterns matches against the input, {@code false}
 	 * if none matches, the input was {@code null} or the list patterns was empty.
-	 * <p/>
+	 * <p>
 	 * Method is null-safe for the passed character sequence, the patterns may not be {@code null}.
-	 * 
+	 * </p>
 	 * @param input the character sequence to be matched, may be {@code null}.
 	 * @param patterns the pattern to be matched against, may not be {@code null}. 
 	 * @return {@code true} if any of the given patterns matches against the input, {@code false}
@@ -117,9 +118,9 @@ public class PatternExtensions {
 	/**
 	 * Returns {@code true} if all of the given patterns matches against the input (or the input was empty), 
 	 * {@code false} if at least one does not match or the input was {@code null}.
-	 * <p/>
+	 * <p>
 	 * Method is null-safe for the passed character sequence, the patterns may not be {@code null}.
-	 * 
+	 * </p>
 	 * @param input the character sequence to be matched, may be {@code null}.
 	 * @param patterns the pattern to be matched against, may not be {@code null}. 
 	 * @return {@code true} if all of the given patterns matches against the input (or the input was empty), 
